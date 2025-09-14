@@ -1,0 +1,21 @@
+services:
+  stt-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./models:/root/.cache/whisper  # Cache models for whisper
+    restart: unless-stopped
+
+  stt-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile.bot
+    depends_on:
+      - stt-api
+    environment:
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - API_URL=http://stt-api:8000/transcribe
+    restart: unless-stopped
