@@ -17,7 +17,7 @@ Clone the repository and install dependencies:
 ```bash
 git clone https://github.com/yourusername/Telegram_STT_bot.git
 cd Telegram_STT_bot
-pip install -r requirements.txt
+uv pip install -r pyproject.toml
 ```
 ## Adding a New Model
 If you implement a new model class, add it to src/model/ and register it in src/model/factory.py.
